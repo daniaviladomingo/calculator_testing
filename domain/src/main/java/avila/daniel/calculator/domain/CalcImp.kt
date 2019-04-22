@@ -1,6 +1,7 @@
 package avila.daniel.calculator.domain
 
 import io.reactivex.Single
+import java.lang.IllegalArgumentException
 
 class CalcImp : ICalc {
     override fun add(op1: Float, op2: Float): Single<Float> = Single.create { it.onSuccess(op1 + op2) }
@@ -11,7 +12,7 @@ class CalcImp : ICalc {
 
     override fun division(op1: Float, op2: Float): Single<Float> = Single.create {
         if (op2 == 0f) {
-            it.onError(Throwable("Division by Zero"))
+            it.onError(IllegalArgumentException("Division by Zero"))
         } else {
             it.onSuccess(op1 / op2)
         }
