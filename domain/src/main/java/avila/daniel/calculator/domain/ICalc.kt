@@ -1,10 +1,11 @@
 package avila.daniel.calculator.domain
 
+import avila.daniel.calculator.domain.model.Operands
 import io.reactivex.Single
 
 interface ICalc {
-    fun add(op1: Float, op2: Float): Single<Float>
-    fun subtract(op1: Float, op2: Float): Single<Float>
-    fun multiply(op1: Float, op2: Float): Single<Float>
-    fun division(op1: Float, op2: Float): Single<Float>
+    fun add(ops: Operands): Single<Float>
+    fun subtract(ops: Operands): Single<Float>
+    fun multiply(ops: Operands): Single<Float>
+    fun division(ops: Operands): Single<Float>
 }
