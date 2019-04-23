@@ -31,4 +31,40 @@ class MainActivityViewModel(
                 resultLiveData.value = Resource.error(it.localizedMessage)
             })
     }
+
+    fun division(op1: Float, op2: Float) {
+        resultLiveData.value = Resource.loading()
+        addDisposable(divisionUseCase.execute(Operands(op1, op2))
+            .observeOn(scheduleProvider.ui())
+            .subscribeOn(scheduleProvider.io())
+            .subscribe({ result ->
+                resultLiveData.value = Resource.success(result)
+            }) {
+                resultLiveData.value = Resource.error(it.localizedMessage)
+            })
+    }
+
+    fun multiply(op1: Float, op2: Float) {
+        resultLiveData.value = Resource.loading()
+        addDisposable(multiplyUseCase.execute(Operands(op1, op2))
+            .observeOn(scheduleProvider.ui())
+            .subscribeOn(scheduleProvider.io())
+            .subscribe({ result ->
+                resultLiveData.value = Resource.success(result)
+            }) {
+                resultLiveData.value = Resource.error(it.localizedMessage)
+            })
+    }
+
+    fun substract(op1: Float, op2: Float) {
+        resultLiveData.value = Resource.loading()
+        addDisposable(substractUseCase.execute(Operands(op1, op2))
+            .observeOn(scheduleProvider.ui())
+            .subscribeOn(scheduleProvider.io())
+            .subscribe({ result ->
+                resultLiveData.value = Resource.success(result)
+            }) {
+                resultLiveData.value = Resource.error(it.localizedMessage)
+            })
+    }
 }
