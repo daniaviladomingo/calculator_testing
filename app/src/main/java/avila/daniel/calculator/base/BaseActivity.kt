@@ -74,7 +74,14 @@ abstract class BaseActivity : AppCompatActivity() {
         }
     }
 
+    protected fun revertResourceState() {
+        view.visibility = VISIBLE
+        view_error.visibility = GONE
+        view_empty.visibility = GONE
+        view_progress.visibility = GONE
+    }
+
     abstract fun checkAgain(): () -> Unit
 
-    abstract fun tryAgain(): () -> Unit
+    protected open fun tryAgain(): () -> Unit = { revertResourceState() }
 }

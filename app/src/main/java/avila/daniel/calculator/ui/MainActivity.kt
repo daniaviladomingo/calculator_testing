@@ -95,7 +95,10 @@ class MainActivity : BaseActivity() {
 
     override fun getLayoutId(): Int = R.layout.activity_main
 
-    override fun checkAgain(): () -> Unit = {}
+    override fun tryAgain(): () -> Unit = {
+        result.setText("")
+        revertResourceState()
+    }
 
-    override fun tryAgain(): () -> Unit = {}
+    override fun checkAgain(): () -> Unit = {}
 }

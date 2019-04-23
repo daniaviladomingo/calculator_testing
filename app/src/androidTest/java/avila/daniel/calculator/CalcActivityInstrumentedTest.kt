@@ -6,7 +6,6 @@ import avila.daniel.calculator.ui.MainActivity
 import avila.daniel.calculator.util.checkText
 import avila.daniel.calculator.util.touch
 import avila.daniel.calculator.util.view
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.Rule
@@ -23,9 +22,10 @@ class CalcActivityInstrumentedTest {
     @JvmField
     val activity = ActivityTestRule<MainActivity>(MainActivity::class.java, false)
 
-    @Before
-    fun clear() {
-        R.id.button_c.touch()
+    @Test
+    fun clearOperation() {
+        listOf(R.id.button_2, R.id.button_add, R.id.button_2, R.id.button_c).forEach { it.touch() }
+        R.id.result.view().checkText("")
     }
 
     /**
@@ -127,5 +127,118 @@ class CalcActivityInstrumentedTest {
             R.id.button_equal
         ).forEach { it.touch() }
         R.id.result.view().checkText("1.0")
+    }
+
+    @Test
+    fun divisionByCero() {
+        // 2 / 0 = Error!!
+        listOf(
+            R.id.button_2,
+            R.id.button_division,
+            R.id.button_0,
+            R.id.button_equal
+        ).forEach { it.touch() }
+        R.id.error_message.view().checkText("Division by Zero")
+    }
+
+    /**
+     * MULTIPLY
+     */
+
+    @Test
+    fun multiplyPositivePositive() {
+        // 2 * 3 = 6.0
+        listOf(R.id.button_2, R.id.button_multiply, R.id.button_3, R.id.button_equal).forEach { it.touch() }
+        R.id.result.view().checkText("6.0")
+    }
+
+    @Test
+    fun multiplyPositiveNegative() {
+        // 2 * -3 = -6.0
+        listOf(
+            R.id.button_2,
+            R.id.button_multiply,
+            R.id.button_substract,
+            R.id.button_3,
+            R.id.button_equal
+        ).forEach { it.touch() }
+        R.id.result.view().checkText("-6.0")
+    }
+
+    @Test
+    fun multiplyNegativePositive() {
+        // -2 * 3 = -6.0
+        listOf(
+            R.id.button_substract,
+            R.id.button_2,
+            R.id.button_multiply,
+            R.id.button_3,
+            R.id.button_equal
+        ).forEach { it.touch() }
+        R.id.result.view().checkText("-6.0")
+    }
+
+    @Test
+    fun multiplyNegativeNegative() {
+        // -2 * -3 = -6.0
+        listOf(
+            R.id.button_substract,
+            R.id.button_2,
+            R.id.button_multiply,
+            R.id.button_substract,
+            R.id.button_3,
+            R.id.button_equal
+        ).forEach { it.touch() }
+        R.id.result.view().checkText("6.0")
+    }
+
+    /**
+     * SUBSTRACT
+     */
+    @Test
+    fun substractPositivePositive() {
+        // 2 - 2 = 0.0
+        listOf(R.id.button_2, R.id.button_substract, R.id.button_2, R.id.button_equal).forEach { it.touch() }
+        R.id.result.view().checkText("0.0")
+    }
+
+    @Test
+    fun substractPositiveNegative() {
+        // 2 - -2 = 4.0
+        listOf(
+            R.id.button_2,
+            R.id.button_substract,
+            R.id.button_substract,
+            R.id.button_2,
+            R.id.button_equal
+        ).forEach { it.touch() }
+        R.id.result.view().checkText("4.0")
+    }
+
+    @Test
+    fun substractNegativePositive() {
+        // -2 - 2 = -4.0
+        listOf(
+            R.id.button_substract,
+            R.id.button_2,
+            R.id.button_substract,
+            R.id.button_2,
+            R.id.button_equal
+        ).forEach { it.touch() }
+        R.id.result.view().checkText("-4.0")
+    }
+
+    @Test
+    fun substractNegativeNegative() {
+        // -2 - -2 = 0.0
+        listOf(
+            R.id.button_substract,
+            R.id.button_2,
+            R.id.button_substract,
+            R.id.button_substract,
+            R.id.button_2,
+            R.id.button_equal
+        ).forEach { it.touch() }
+        R.id.result.view().checkText("0.0")
     }
 }
