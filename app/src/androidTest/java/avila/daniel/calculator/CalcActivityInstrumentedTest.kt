@@ -1,11 +1,12 @@
 package avila.daniel.calculator
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
 import avila.daniel.calculator.ui.MainActivity
-import avila.daniel.calculator.util.checkText
-import avila.daniel.calculator.util.touch
-import avila.daniel.calculator.util.view
+import avila.daniel.ui.testing.util.checkText
+import avila.daniel.ui.testing.util.touch
+import avila.daniel.ui.testing.util.view
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.Rule
@@ -16,11 +17,12 @@ import org.junit.Rule
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 @RunWith(AndroidJUnit4::class)
+@LargeTest
 class CalcActivityInstrumentedTest {
 
     @Rule
     @JvmField
-    val activity = ActivityTestRule<MainActivity>(MainActivity::class.java, false)
+    val activity = ActivityTestRule(MainActivity::class.java)
 
     @Test
     fun clearOperation() {

@@ -1,4 +1,4 @@
-package avila.daniel.calculator.util
+package avila.daniel.ui.testing.util
 
 
 import androidx.test.espresso.Espresso.onView
@@ -11,4 +11,4 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 fun Int.view(): ViewInteraction = onView(withId(this))
 fun Int.touch(): ViewInteraction = this.view().perform(click())
 
-fun ViewInteraction.checkText(text: String) = this.check(ViewAssertions.matches(ViewMatchers.withText(text)))
+fun ViewInteraction.checkText(text: String): ViewInteraction = this.check(ViewAssertions.matches(ViewMatchers.withText(text)))
