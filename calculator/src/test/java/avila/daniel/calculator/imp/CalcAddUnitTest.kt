@@ -1,6 +1,8 @@
-package avila.daniel.calculator.domain
+package avila.daniel.calculator.imp
 
+import avila.daniel.calculator.domain.ICalc
 import avila.daniel.calculator.domain.model.Operands
+import avila.domingo.calculator.imp.CalcImp
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

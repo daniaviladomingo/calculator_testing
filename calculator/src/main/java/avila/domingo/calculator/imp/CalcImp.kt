@@ -1,5 +1,6 @@
-package avila.daniel.calculator.domain
+package avila.domingo.calculator.imp
 
+import avila.daniel.calculator.domain.ICalc
 import avila.daniel.calculator.domain.model.Operands
 import io.reactivex.Single
 import java.lang.IllegalArgumentException
