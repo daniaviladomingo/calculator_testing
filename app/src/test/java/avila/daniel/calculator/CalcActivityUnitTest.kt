@@ -1,5 +1,6 @@
 package avila.daniel.calculator
 
+import android.os.Build
 import androidx.test.rule.ActivityTestRule
 import avila.daniel.calculator.ui.MainActivity
 import avila.daniel.ui.testing.util.checkText
@@ -8,9 +9,11 @@ import avila.daniel.ui.testing.util.view
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.koin.test.AutoCloseKoinTest
 
 import org.koin.test.KoinTest
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
 
 
 /**
@@ -19,7 +22,8 @@ import org.robolectric.RobolectricTestRunner
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 @RunWith(RobolectricTestRunner::class)
-class CalcActivityUnitTest : KoinTest {
+@Config(sdk = [Build.VERSION_CODES.P])
+class CalcActivityUnitTest: AutoCloseKoinTest() {
     @Rule
     @JvmField
     val activity = ActivityTestRule(MainActivity::class.java)
