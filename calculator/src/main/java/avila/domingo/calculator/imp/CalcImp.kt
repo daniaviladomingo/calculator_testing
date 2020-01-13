@@ -8,7 +8,7 @@ import java.lang.IllegalArgumentException
 class CalcImp : ICalc {
     override fun add(ops: Operands): Single<Float> = Single.create { it.onSuccess(ops.run { op1 + op2 }) }
 
-    override fun subtract(ops: Operands): Single<Float> = Single.create { it.onSuccess(ops.run { op1 - op2 }) }
+    override fun substract(ops: Operands): Single<Float> = Single.create { it.onSuccess(ops.run { op1 - op2 }) }
 
     override fun multiply(ops: Operands): Single<Float> = Single.create { it.onSuccess(ops.run { op1 * op2 }) }
 

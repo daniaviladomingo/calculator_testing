@@ -9,7 +9,7 @@ import avila.daniel.calculator.domain.ICalc
 import avila.daniel.calculator.domain.interactor.AddUseCase
 import avila.daniel.calculator.domain.interactor.DivisionUseCase
 import avila.daniel.calculator.domain.interactor.MultiplyUseCase
-import avila.daniel.calculator.domain.interactor.SubtractUseCase
+import avila.daniel.calculator.domain.interactor.SubstractUseCase
 import avila.daniel.calculator.schedulers.IScheduleProvider
 import avila.daniel.calculator.schedulers.ScheduleProviderImp
 import avila.daniel.calculator.ui.MainActivityViewModel
@@ -37,7 +37,7 @@ val useCaseModule = module {
     factory { AddUseCase(get()) }
     factory { DivisionUseCase(get()) }
     factory { MultiplyUseCase(get()) }
-    factory { SubtractUseCase(get()) }
+    factory { SubstractUseCase(get()) }
 }
 
 val scheduleModule = module {
