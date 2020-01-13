@@ -6,10 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import avila.daniel.calculator.di.qualifiers.ForActivity
 import avila.daniel.calculator.di.qualifiers.ForApplication
 import avila.daniel.calculator.domain.ICalc
-import avila.daniel.calculator.domain.interactor.AddUseCase
-import avila.daniel.calculator.domain.interactor.DivisionUseCase
-import avila.daniel.calculator.domain.interactor.MultiplyUseCase
-import avila.daniel.calculator.domain.interactor.SubstractUseCase
+import avila.daniel.calculator.domain.interactor.*
 import avila.daniel.calculator.schedulers.IScheduleProvider
 import avila.daniel.calculator.schedulers.ScheduleProviderImp
 import avila.daniel.calculator.ui.MainActivityViewModel
@@ -37,7 +34,7 @@ val useCaseModule = module {
     factory { AddUseCase(get()) }
     factory { DivisionUseCase(get()) }
     factory { MultiplyUseCase(get()) }
-    factory { SubstractUseCase(get()) }
+    factory { SubtractUseCase(get()) }
 }
 
 val scheduleModule = module {
