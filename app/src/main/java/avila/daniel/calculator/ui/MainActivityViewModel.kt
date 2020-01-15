@@ -4,7 +4,7 @@ import avila.daniel.calculator.base.BaseViewModel
 import avila.daniel.calculator.domain.interactor.AddUseCase
 import avila.daniel.calculator.domain.interactor.DivisionUseCase
 import avila.daniel.calculator.domain.interactor.MultiplyUseCase
-import avila.daniel.calculator.domain.interactor.SubstractUseCase
+import avila.daniel.calculator.domain.interactor.SubtractUseCase
 import avila.daniel.calculator.domain.model.Operands
 import avila.daniel.calculator.schedulers.IScheduleProvider
 import avila.daniel.calculator.ui.data.Resource
@@ -14,7 +14,7 @@ class MainActivityViewModel(
     private val addUseCase: AddUseCase,
     private val divisionUseCase: DivisionUseCase,
     private val multiplyUseCase: MultiplyUseCase,
-    private val substractUseCase: SubstractUseCase,
+    private val substractUseCase: SubtractUseCase,
     private val scheduleProvider: IScheduleProvider
 ) : BaseViewModel() {
 
