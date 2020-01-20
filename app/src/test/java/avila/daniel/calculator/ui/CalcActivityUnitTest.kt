@@ -1,8 +1,8 @@
-package avila.daniel.calculator
+package avila.daniel.calculator.ui
 
 import android.os.Build
 import androidx.test.rule.ActivityTestRule
-import avila.daniel.calculator.ui.MainActivity
+import avila.daniel.calculator.R
 import avila.daniel.ui.testing.util.checkText
 import avila.daniel.ui.testing.util.touch
 import avila.daniel.ui.testing.util.view
@@ -10,11 +10,8 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.koin.test.AutoCloseKoinTest
-
-import org.koin.test.KoinTest
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
-
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -23,14 +20,19 @@ import org.robolectric.annotation.Config
  */
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [Build.VERSION_CODES.P])
-class CalcActivityUnitTest: AutoCloseKoinTest() {
-    @Rule
-    @JvmField
-    val activity = ActivityTestRule(MainActivity::class.java)
+class CalcActivityUnitTest : AutoCloseKoinTest() {
+
+    @get:Rule
+    val rule = ActivityTestRule(CalcActivity::class.java)
 
     @Test
-    fun clearOperation() {
-        listOf(R.id.button_2, R.id.button_add, R.id.button_2, R.id.button_c).forEach { it.touch() }
+    fun `clear operation`() {
+        listOf(
+            R.id.button_2,
+            R.id.button_add,
+            R.id.button_2,
+            R.id.button_c
+        ).forEach { it.touch() }
         R.id.result.view().checkText("")
     }
 
@@ -38,14 +40,19 @@ class CalcActivityUnitTest: AutoCloseKoinTest() {
      * ADD
      */
     @Test
-    fun addPositivePositive() {
+    fun `add positive positive`() {
         // 2 + 2 = 4.0
-        listOf(R.id.button_2, R.id.button_add, R.id.button_2, R.id.button_equal).forEach { it.touch() }
+        listOf(
+            R.id.button_2,
+            R.id.button_add,
+            R.id.button_2,
+            R.id.button_equal
+        ).forEach { it.touch() }
         R.id.result.view().checkText("4.0")
     }
 
     @Test
-    fun addPositiveNegative() {
+    fun `add positive negative`() {
         // 2 + -2 = 0.0
         listOf(
             R.id.button_2,
@@ -58,7 +65,7 @@ class CalcActivityUnitTest: AutoCloseKoinTest() {
     }
 
     @Test
-    fun addNegativePositive() {
+    fun `add negative positive`() {
         // -2 + 2 = 0.0
         listOf(
             R.id.button_substract,
@@ -71,7 +78,7 @@ class CalcActivityUnitTest: AutoCloseKoinTest() {
     }
 
     @Test
-    fun addNegativeNegative() {
+    fun `add negative negative`() {
         // -2 + -2 = -4.0
         listOf(
             R.id.button_substract,
@@ -89,14 +96,19 @@ class CalcActivityUnitTest: AutoCloseKoinTest() {
      */
 
     @Test
-    fun divisionPositivePositive() {
+    fun `division positive positive`() {
         // 2 / 2 = 1.0
-        listOf(R.id.button_2, R.id.button_division, R.id.button_2, R.id.button_equal).forEach { it.touch() }
+        listOf(
+            R.id.button_2,
+            R.id.button_division,
+            R.id.button_2,
+            R.id.button_equal
+        ).forEach { it.touch() }
         R.id.result.view().checkText("1.0")
     }
 
     @Test
-    fun divisionPositiveNegative() {
+    fun `division positive negative`() {
         // 2 / -2 = -1.0
         listOf(
             R.id.button_2,
@@ -109,7 +121,7 @@ class CalcActivityUnitTest: AutoCloseKoinTest() {
     }
 
     @Test
-    fun divisionNegativePositive() {
+    fun `division negative positive`() {
         // -2 / 2 = -1.0
         listOf(
             R.id.button_substract,
@@ -122,7 +134,7 @@ class CalcActivityUnitTest: AutoCloseKoinTest() {
     }
 
     @Test
-    fun divisionNegativeNegative() {
+    fun `division negative negative`() {
         // -2 / -2 = 1.0
         listOf(
             R.id.button_substract,
@@ -136,7 +148,7 @@ class CalcActivityUnitTest: AutoCloseKoinTest() {
     }
 
     @Test
-    fun divisionByCero() {
+    fun `division by zero`() {
         // 2 / 0 = Error!!
         listOf(
             R.id.button_2,
@@ -152,14 +164,19 @@ class CalcActivityUnitTest: AutoCloseKoinTest() {
      */
 
     @Test
-    fun multiplyPositivePositive() {
+    fun `multiply positive positive`() {
         // 2 * 3 = 6.0
-        listOf(R.id.button_2, R.id.button_multiply, R.id.button_3, R.id.button_equal).forEach { it.touch() }
+        listOf(
+            R.id.button_2,
+            R.id.button_multiply,
+            R.id.button_3,
+            R.id.button_equal
+        ).forEach { it.touch() }
         R.id.result.view().checkText("6.0")
     }
 
     @Test
-    fun multiplyPositiveNegative() {
+    fun `multiply positive negative`() {
         // 2 * -3 = -6.0
         listOf(
             R.id.button_2,
@@ -172,7 +189,7 @@ class CalcActivityUnitTest: AutoCloseKoinTest() {
     }
 
     @Test
-    fun multiplyNegativePositive() {
+    fun `multiply negative positive`() {
         // -2 * 3 = -6.0
         listOf(
             R.id.button_substract,
@@ -185,7 +202,7 @@ class CalcActivityUnitTest: AutoCloseKoinTest() {
     }
 
     @Test
-    fun multiplyNegativeNegative() {
+    fun `multiply negative negative`() {
         // -2 * -3 = -6.0
         listOf(
             R.id.button_substract,
@@ -199,17 +216,22 @@ class CalcActivityUnitTest: AutoCloseKoinTest() {
     }
 
     /**
-     * SUBSTRACT
+     * SUBTRACT
      */
     @Test
-    fun substractPositivePositive() {
+    fun `subtract positive positive`() {
         // 2 - 2 = 0.0
-        listOf(R.id.button_2, R.id.button_substract, R.id.button_2, R.id.button_equal).forEach { it.touch() }
+        listOf(
+            R.id.button_2,
+            R.id.button_substract,
+            R.id.button_2,
+            R.id.button_equal
+        ).forEach { it.touch() }
         R.id.result.view().checkText("0.0")
     }
 
     @Test
-    fun substractPositiveNegative() {
+    fun `subtract positive negative`() {
         // 2 - -2 = 4.0
         listOf(
             R.id.button_2,
@@ -222,7 +244,7 @@ class CalcActivityUnitTest: AutoCloseKoinTest() {
     }
 
     @Test
-    fun substractNegativePositive() {
+    fun `subtract negative positive`() {
         // -2 - 2 = -4.0
         listOf(
             R.id.button_substract,
@@ -235,7 +257,7 @@ class CalcActivityUnitTest: AutoCloseKoinTest() {
     }
 
     @Test
-    fun substractNegativeNegative() {
+    fun `subtract negative negative`() {
         // -2 - -2 = 0.0
         listOf(
             R.id.button_substract,

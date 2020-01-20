@@ -9,7 +9,7 @@ import avila.daniel.calculator.domain.ICalc
 import avila.daniel.calculator.domain.interactor.*
 import avila.daniel.calculator.schedulers.IScheduleProvider
 import avila.daniel.calculator.schedulers.ScheduleProviderImp
-import avila.daniel.calculator.ui.MainActivityViewModel
+import avila.daniel.calculator.ui.CalcViewModel
 import avila.domingo.calculator.imp.CalcImp
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
@@ -27,7 +27,7 @@ val activityModule = module {
 }
 
 val viewModelModule = module {
-    viewModel { MainActivityViewModel(get(), get(), get(), get(), get()) }
+    viewModel { CalcViewModel(get(), get(), get(), get(), get()) }
 }
 
 val useCaseModule = module {

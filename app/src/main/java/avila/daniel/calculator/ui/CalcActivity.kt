@@ -9,9 +9,9 @@ import avila.daniel.calculator.ui.data.ResourceState
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class MainActivity : BaseActivity() {
+class CalcActivity : BaseActivity() {
 
-    private val mainActivityViewModel: MainActivityViewModel by viewModel()
+    private val calcViewModel: CalcViewModel by viewModel()
 
     private var operator: Operator? = null
 
@@ -69,10 +69,10 @@ class MainActivity : BaseActivity() {
                 if (resultText.isNotEmpty()) {
                     val op2 = resultText.toFloat()
                     when (this) {
-                        Operator.ADD -> mainActivityViewModel.add(op1!!, op2)
-                        Operator.DIVISION -> mainActivityViewModel.division(op1!!, op2)
-                        Operator.MULTIPLY -> mainActivityViewModel.multiply(op1!!, op2)
-                        Operator.SUBSTRACT -> mainActivityViewModel.substract(op1!!, op2)
+                        Operator.ADD -> calcViewModel.add(op1!!, op2)
+                        Operator.DIVISION -> calcViewModel.division(op1!!, op2)
+                        Operator.MULTIPLY -> calcViewModel.multiply(op1!!, op2)
+                        Operator.SUBSTRACT -> calcViewModel.subtract(op1!!, op2)
                     }
                 }
             }
@@ -80,7 +80,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setListener() {
-        mainActivityViewModel.resultLiveData.observe(this, Observer { resource ->
+        calcViewModel.resultLiveData.observe(this, Observer { resource ->
             resource?.run {
                 managementResourceState(status, message)
                 if (status == ResourceState.SUCCESS) {

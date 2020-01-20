@@ -10,11 +10,11 @@ import avila.daniel.calculator.schedulers.IScheduleProvider
 import avila.daniel.calculator.ui.data.Resource
 import avila.daniel.calculator.util.SingleLiveEvent
 
-class MainActivityViewModel(
+class CalcViewModel(
     private val addUseCase: AddUseCase,
     private val divisionUseCase: DivisionUseCase,
     private val multiplyUseCase: MultiplyUseCase,
-    private val substractUseCase: SubtractUseCase,
+    private val subtractUseCase: SubtractUseCase,
     private val scheduleProvider: IScheduleProvider
 ) : BaseViewModel() {
 
@@ -56,9 +56,9 @@ class MainActivityViewModel(
             })
     }
 
-    fun substract(op1: Float, op2: Float) {
+    fun subtract(op1: Float, op2: Float) {
         resultLiveData.value = Resource.loading()
-        addDisposable(substractUseCase.execute(Operands(op1, op2))
+        addDisposable(subtractUseCase.execute(Operands(op1, op2))
             .observeOn(scheduleProvider.ui())
             .subscribeOn(scheduleProvider.io())
             .subscribe({ result ->
