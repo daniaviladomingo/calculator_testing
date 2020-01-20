@@ -6,9 +6,7 @@ import avila.daniel.calculator.domain.interactor.AddUseCase
 import avila.daniel.calculator.domain.interactor.DivisionUseCase
 import avila.daniel.calculator.domain.interactor.MultiplyUseCase
 import avila.daniel.calculator.domain.interactor.SubtractUseCase
-import avila.daniel.calculator.schedulers.IScheduleProvider
 import io.reactivex.Single
-import io.reactivex.schedulers.Schedulers
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -31,21 +29,16 @@ class CalcViewModelTest {
     @Mock
     lateinit var subtractUseCase: SubtractUseCase
     @Mock
-    lateinit var scheduleProvider : IScheduleProvider
-    @Mock
     lateinit var calcViewModel: CalcViewModel
 
     @Before
     fun setUp() {
-        Mockito.`when`(scheduleProvider.io()).thenReturn(Schedulers.trampoline())
-        Mockito.`when`(scheduleProvider.ui()).thenReturn(Schedulers.trampoline())
-
         calcViewModel = CalcViewModel(
             addUseCase,
             divisionUseCase,
             multiplyUseCase,
             subtractUseCase,
-            scheduleProvider
+            MockSchedulersImp
         )
     }
 
