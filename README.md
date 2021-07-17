@@ -1,7 +1,7 @@
 [![License Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=true)](http://www.apache.org/licenses/LICENSE-2.0)
 ![minSdkVersion 16](https://img.shields.io/badge/minSdkVersion-16-red.svg?style=true)
 ![compileSdkVersion 29](https://img.shields.io/badge/compileSdkVersion-29-yellow.svg?style=true)
-[![Build Status](https://travis-ci.org/daniaviladomingo/calculator_testing.svg?branch=master)](https://travis-ci.org/daniaviladomingo/calculator_testing)
+[![Build Status](https://travis-ci.com/daniaviladomingo/calculator_testing.svg?branch=master)](https://travis-ci.com/daniaviladomingo/calculator_testing)
 
 # Calculator app to implement testing feature
 
