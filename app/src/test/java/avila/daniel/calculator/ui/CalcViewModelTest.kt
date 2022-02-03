@@ -6,33 +6,42 @@ import avila.daniel.calculator.domain.interactor.AddUseCase
 import avila.daniel.calculator.domain.interactor.DivisionUseCase
 import avila.daniel.calculator.domain.interactor.MultiplyUseCase
 import avila.daniel.calculator.domain.interactor.SubtractUseCase
+import avila.daniel.calculator.domain.model.Operands
+import avila.daniel.calculator.ui.data.ResourceState
 import io.reactivex.Single
+import io.mockk.MockKAnnotations
+import io.mockk.every
+import io.mockk.impl.annotations.MockK
+import io.mockk.verify
+import org.amshove.kluent.shouldBeEqualTo
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.Mockito
-import org.mockito.junit.MockitoJUnitRunner
+import java.lang.IllegalArgumentException
 
-@RunWith(MockitoJUnitRunner::class)
 class CalcViewModelTest {
     @get:Rule
     val rule = InstantTaskExecutorRule()
 
-    @Mock
+    @MockK
     lateinit var addUseCase: AddUseCase
-    @Mock
+
+    @MockK
     lateinit var divisionUseCase: DivisionUseCase
-    @Mock
+
+    @MockK
     lateinit var multiplyUseCase: MultiplyUseCase
-    @Mock
+
+    @MockK
     lateinit var subtractUseCase: SubtractUseCase
-    @Mock
+
+    @MockK
     lateinit var calcViewModel: CalcViewModel
 
     @Before
     fun setUp() {
+        MockKAnnotations.init(this)
+
         calcViewModel = CalcViewModel(
             addUseCase,
             divisionUseCase,
@@ -44,41 +53,76 @@ class CalcViewModelTest {
 
     @Test
     fun `should add operands`() {
-        Mockito.`when`(addUseCase.execute(operands)).thenReturn(Single.just(ADD_RESULT))
+        every { addUseCase.execute(operands) } returns Single.just(ADD_RESULT)
 
         calcViewModel.add(OP1, OP2)
 
-        Mockito.verify(addUseCase, Mockito.times(1)).execute(operands)
-        Mockito.verifyNoMoreInteractions(addUseCase)
+        val value = calcViewModel.resultLiveData.getOrAwaitValue()
+
+        value.status shouldBeEqualTo ResourceState.SUCCESS
+        value.data shouldBeEqualTo ADD_RESULT
+
+        verify(exactly = 1) { addUseCase.execute(operands) }
     }
 
     @Test
     fun `should subtract operands`() {
-        Mockito.`when`(subtractUseCase.execute(operands)).thenReturn(Single.just(SUBTRACT_RESULT))
+        every { subtractUseCase.execute(operands) } returns Single.just(SUBTRACT_RESULT)
 
         calcViewModel.subtract(OP1, OP2)
 
-        Mockito.verify(subtractUseCase, Mockito.times(1)).execute(operands)
-        Mockito.verifyNoMoreInteractions(subtractUseCase)
+        val value = calcViewModel.resultLiveData.getOrAwaitValue()
+
+        value.status shouldBeEqualTo ResourceState.SUCCESS
+        value.data shouldBeEqualTo SUBTRACT_RESULT
+
+        verify(exactly = 1) { subtractUseCase.execute(operands) }
     }
 
     @Test
     fun `should multiply operands`() {
-        Mockito.`when`(multiplyUseCase.execute(operands)).thenReturn(Single.just(MULTIPLY_RESULT))
+        every { multiplyUseCase.execute(operands) } returns Single.just(MULTIPLY_RESULT)
 
         calcViewModel.multiply(OP1, OP2)
 
-        Mockito.verify(multiplyUseCase, Mockito.times(1)).execute(operands)
-        Mockito.verifyNoMoreInteractions(multiplyUseCase)
+        val value = calcViewModel.resultLiveData.getOrAwaitValue()
+
+        value.status shouldBeEqualTo ResourceState.SUCCESS
+        value.data shouldBeEqualTo MULTIPLY_RESULT
+
+        verify(exactly = 1) { multiplyUseCase.execute(operands) }
     }
 
     @Test
     fun `should divide operands`() {
-        Mockito.`when`(divisionUseCase.execute(operands)).thenReturn(Single.just(DIVISION_RESULT))
+        every { divisionUseCase.execute(operands) } returns Single.just(DIVISION_RESULT)
 
         calcViewModel.division(OP1, OP2)
 
-        Mockito.verify(divisionUseCase, Mockito.times(1)).execute(operands)
-        Mockito.verifyNoMoreInteractions(divisionUseCase)
+        val value = calcViewModel.resultLiveData.getOrAwaitValue()
+
+        value.status shouldBeEqualTo ResourceState.SUCCESS
+        value.data shouldBeEqualTo DIVISION_RESULT
+
+        verify(exactly = 1) { divisionUseCase.execute(operands) }
+    }
+
+    @Test
+    fun `division by zero`() {
+        val op = Operands(2f, 0f)
+        every { divisionUseCase.execute(op) } returns Single.create {
+            it.onError(
+                IllegalArgumentException("Division by Zero")
+            )
+        }
+
+        calcViewModel.division(2f, 0f)
+
+        val value = calcViewModel.resultLiveData.getOrAwaitValue()
+
+        value.status shouldBeEqualTo ResourceState.ERROR
+        value.message shouldBeEqualTo "Division by Zero"
+
+        verify(exactly = 1) { divisionUseCase.execute(op) }
     }
 }
